@@ -180,8 +180,8 @@ module Neography
          post("/node/#{get_id(from)}/relationships", options)
       end
 
-      def create_unique_relationship(index, key, value, type, from, to)
-        body = {:key=>key,:value=>value, :type => type }
+      def create_unique_relationship(index, key, value, type, from, to, props = nil)
+        body = {:key=>key,:value=>value, :type => type, :data => props }
         body[:start] = self.configuration + "/node/#{get_id(from)}"
         body[:end] = self.configuration + "/node/#{get_id(to)}"
         options = { :body => body.to_json, :headers => {'Content-Type' => 'application/json'} } 
